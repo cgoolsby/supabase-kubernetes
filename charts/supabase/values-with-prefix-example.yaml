@@ -1,0 +1,31 @@
+# Example values file showing how to use Kong with a path prefix
+# This extends the default values.yaml
+
+kong:
+  # Set the path prefix to serve all Supabase APIs under /supabase/*
+  pathPrefix: "/supabase"
+  
+  # IMPORTANT: When using pathPrefix, the ingress should still route to /
+  # because Kong will handle the path matching internally
+  ingress:
+    enabled: true
+    className: "nginx"
+    annotations:
+      # Remove any rewrite-target annotation - let Kong handle paths
+      # nginx.ingress.kubernetes.io/rewrite-target: /
+    hosts:
+      - host: example.com
+        paths:
+          - path: /supabase
+            pathType: Prefix
+
+# Example API endpoints with the prefix:
+# - Auth: https://example.com/supabase/auth/v1/signup
+# - Rest API: https://example.com/supabase/rest/v1/
+# - Realtime: wss://example.com/supabase/realtime/v1/
+# - Storage: https://example.com/supabase/storage/v1/
+# - Functions: https://example.com/supabase/functions/v1/
+# - Studio Dashboard: https://example.com/supabase/
+
+# Note: Kong will receive requests at /supabase/* and match them against
+# the configured routes. Make sure your ingress does NOT rewrite paths.

@@ -789,6 +789,9 @@ kong:
   service:
     type: ClusterIP
     port: 8000
+  # Path prefix for all Kong routes (e.g., "/supabase" to serve all APIs under /supabase/*)
+  # Leave empty for no prefix (default behavior)
+  pathPrefix: ""
   environment:
     KONG_DATABASE: "off"
     KONG_DECLARATIVE_CONFIG: /usr/local/kong/kong.yml

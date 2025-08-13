@@ -55,7 +55,7 @@ data:
           - name: auth-v1-open
             strip_path: true
             paths:
-              - /auth/v1/verify
+              - {{ .Values.kong.pathPrefix }}/auth/v1/verify
         plugins:
           - name: cors
       - name: auth-v1-open-callback
@@ -64,7 +64,7 @@ data:
           - name: auth-v1-open-callback
             strip_path: true
             paths:
-              - /auth/v1/callback
+              - {{ .Values.kong.pathPrefix }}/auth/v1/callback
         plugins:
           - name: cors
       - name: auth-v1-open-authorize
@@ -73,7 +73,7 @@ data:
           - name: auth-v1-open-authorize
             strip_path: true
             paths:
-              - /auth/v1/authorize
+              - {{ .Values.kong.pathPrefix }}/auth/v1/authorize
         plugins:
           - name: cors
       - name: auth-v1
@@ -83,7 +83,7 @@ data:
           - name: auth-v1-all
             strip_path: true
             paths:
-              - /auth/v1/
+              - {{ .Values.kong.pathPrefix }}/auth/v1/
         plugins:
           - name: cors
           - name: key-auth
@@ -104,7 +104,7 @@ data:
           - name: rest-v1-all
             strip_path: true
             paths:
-              - /rest/v1/
+              - {{ .Values.kong.pathPrefix }}/rest/v1/
         plugins:
           - name: cors
           - name: key-auth
@@ -123,7 +123,7 @@ data:
           - name: graphql-v1-all
             strip_path: true
             paths:
-              - /graphql/v1
+              - {{ .Values.kong.pathPrefix }}/graphql/v1
         plugins:
           - name: cors
           - name: key-auth
@@ -149,7 +149,7 @@ data:
           - name: realtime-v1-all
             strip_path: true
             paths:
-              - /realtime/v1/
+              - {{ .Values.kong.pathPrefix }}/realtime/v1/
         plugins:
           - name: cors
           - name: key-auth
@@ -170,7 +170,7 @@ data:
           - name: storage-v1-all
             strip_path: true
             paths:
-              - /storage/v1/
+              - {{ .Values.kong.pathPrefix }}/storage/v1/
         plugins:
           - name: cors
     {{- end }}
@@ -182,7 +182,7 @@ data:
           - name: functions-v1-all
             strip_path: true
             paths:
-              - /functions/v1/
+              - {{ .Values.kong.pathPrefix }}/functions/v1/
         plugins:
           - name: cors
     {{- end }}
@@ -194,7 +194,7 @@ data:
           - name: analytics-v1-all
             strip_path: true
             paths:
-              - /analytics/v1/
+              - {{ .Values.kong.pathPrefix }}/analytics/v1/
     {{- end }}
     {{- if .Values.meta.enabled }}
       - name: meta
@@ -204,7 +204,7 @@ data:
           - name: meta-all
             strip_path: true
             paths:
-              - /pg/
+              - {{ .Values.kong.pathPrefix }}/pg/
         plugins:
           - name: key-auth
             config:
@@ -222,7 +222,7 @@ data:
           - name: dashboard-all
             strip_path: true
             paths:
-              - /
+              - {{ .Values.kong.pathPrefix }}/
     {{- if .Values.secret.dashboard }}
         plugins:
           - name: cors
